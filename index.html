@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Booze × Dynamic Code — Media & Social Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        @media print {
+            body { margin: 0; padding: 0; background: #fff; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; page-break-inside: avoid; }
+            .page:last-child { page-break-after: avoid; }
+            .no-print { display: none !important; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #0a0a0a;
+            --dark: #1a1a1a;
+            --gray-900: #262626;
+            --gray-700: #404040;
+            --gray-500: #6b6b6b;
+            --gray-300: #a3a3a3;
+            --gray-100: #f5f5f5;
+            --white: #ffffff;
+            --accent: #f05522;
+            --accent-dark: #d43f12;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-100);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 210mm; margin: 0 auto; padding: 20px; }
+        .page {
+            width: 210mm; min-height: 297mm; background: white;
+            margin: 0 auto 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative; overflow: hidden;
+        }
+        .page-inner { padding: 15mm 20mm; position: relative; z-index: 2; }
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: 267mm; }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40mm; }
+        .logo-img { height: 28px; width: auto; opacity: 0.9; }
+        .client-wordmark {
+            font-family: 'Inter', sans-serif; font-size: 26pt; font-weight: 800;
+            color: var(--black); letter-spacing: -1px; line-height: 1;
+        }
+        .cover-main { flex: 1; }
+        .cover-eyebrow { font-size: 11pt; font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray-500); margin-bottom: 8mm; }
+        .cover-title { font-size: 48pt; font-weight: 700; line-height: 1.1; margin-bottom: 6mm; color: var(--black); }
+        .cover-subtitle { font-size: 20pt; font-weight: 500; color: var(--gray-700); margin-bottom: 4mm; }
+        .cover-description { font-size: 12pt; line-height: 1.7; color: var(--gray-500); max-width: 140mm; }
+        .cover-footer {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 8mm; padding-top: 8mm; border-top: 1px solid var(--gray-300);
+        }
+        .cover-footer-item { display: flex; flex-direction: column; gap: 2mm; }
+        .cover-footer-label { font-size: 9pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-500); }
+        .cover-footer-value { font-size: 11pt; font-weight: 600; color: var(--black); }
+        .accent-bar {
+            position: absolute; top: 0; left: 0; width: 5mm; height: 100%;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
+        }
+        .page-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 12mm; padding-bottom: 3mm; border-bottom: 1px solid var(--gray-300);
+        }
+        .page-header-logo { height: 22px; width: auto; opacity: 0.7; }
+        .page-header-title { font-size: 9pt; font-weight: 500; color: var(--gray-500); }
+        h1 { font-size: 32pt; font-weight: 700; line-height: 1.2; margin-bottom: 8mm; color: var(--black); }
+        h2 { font-size: 16pt; font-weight: 600; margin-bottom: 4mm; color: var(--black); }
+        h3 { font-size: 13pt; font-weight: 600; margin-bottom: 3mm; color: var(--black); }
+        p { font-size: 11pt; line-height: 1.7; color: var(--gray-700); margin-bottom: 3mm; }
+        ul { list-style: none; padding: 0; }
+        ul li { font-size: 11pt; line-height: 1.8; color: var(--gray-700); padding-left: 5mm; position: relative; margin-bottom: 2mm; }
+        ul li:before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .section { margin-bottom: 8mm; }
+        .info-card { background: var(--gray-100); border-left: 3px solid var(--accent); padding: 5mm; border-radius: 2mm; margin-bottom: 6mm; }
+        .info-card ul { margin: 0; }
+        .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-bottom: 8mm; }
+        .deliverable-card { background: var(--gray-100); padding: 5mm; border-radius: 2mm; border-top: 2px solid var(--accent); }
+        .deliverable-icon { font-size: 24pt; margin-bottom: 3mm; }
+        .deliverable-title { font-size: 12pt; font-weight: 600; margin-bottom: 2mm; color: var(--black); }
+        .deliverable-desc { font-size: 10pt; line-height: 1.6; color: var(--gray-700); }
+        /* Pricing */
+        .pricing-card { background: var(--black); color: var(--white); padding: 8mm; border-radius: 3mm; margin-bottom: 6mm; }
+        .pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 3mm 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .pricing-row:last-child { border-bottom: none; }
+        .pricing-label { font-size: 11pt; font-weight: 500; color: rgba(255,255,255,0.8); }
+        .pricing-value { font-size: 12pt; font-weight: 600; color: var(--white); }
+        .pricing-value.strike { text-decoration: line-through; opacity: 0.45; font-weight: 400; }
+        .pricing-total { margin-top: 4mm; padding-top: 4mm; border-top: 2px solid var(--accent); }
+        .pricing-total-label { font-size: 14pt; font-weight: 600; color: rgba(255,255,255,0.8); }
+        .pricing-total-value { font-size: 24pt; font-weight: 700; color: var(--white); }
+        /* Signature */
+        .signature-section { margin-top: 10mm; padding: 8mm; background: var(--gray-100); border-radius: 3mm; }
+        .signature-canvas-wrapper { background: white; border: 2px dashed var(--gray-300); border-radius: 2mm; padding: 8mm; margin-bottom: 4mm; min-height: 30mm; }
+        .signature-placeholder { text-align: center; color: var(--gray-500); font-size: 10pt; padding: 20mm 0; }
+        #signatureCanvas { border: none; cursor: crosshair; width: 100%; height: 100px; }
+        .signature-buttons { display: flex; gap: 3mm; margin-bottom: 4mm; }
+        .btn { padding: 3mm 6mm; border: none; border-radius: 2mm; font-size: 10pt; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--black); color: var(--white); }
+        .btn-secondary { background: var(--gray-300); color: var(--black); }
+        .signature-info { font-size: 9pt; color: var(--gray-500); line-height: 1.6; }
+        .page-number { position: absolute; bottom: 15mm; right: 20mm; font-size: 9pt; font-weight: 500; color: var(--gray-500); }
+        /* Login */
+        #passwordScreen {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            display: flex; align-items: center; justify-content: center; z-index: 9999;
+        }
+        .password-box { background: white; padding: 48px 40px; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); text-align: center; max-width: 420px; width: 90%; }
+        .password-logo { font-size: 18px; font-weight: 700; margin-bottom: 32px; color: var(--black); letter-spacing: -0.5px; }
+        .password-box h2 { margin: 0 0 8px; font-size: 28px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
+        .password-box p { margin: 0 0 32px; font-size: 14px; color: var(--gray-500); line-height: 1.5; }
+        .password-input-wrapper { position: relative; margin-bottom: 24px; }
+        .password-box input { width: 100%; padding: 12px 44px 12px 16px; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 16px; background: #f9fafb; color: var(--black); outline: none; box-sizing: border-box; transition: all 0.2s; }
+        .password-box input:focus { background: white; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240,85,34,0.08); }
+        .password-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 6px; opacity: 0.5; color: var(--gray-500); display: flex; align-items: center; }
+        .password-toggle:hover { opacity: 0.8; }
+        .eye-icon { width: 18px; height: 18px; }
+        .password-submit-btn { width: 100%; padding: 12px; background: var(--black); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .password-submit-btn:hover { background: var(--gray-900); }
+        .password-error { color: #dc2626; font-size: 13px; margin-top: 12px; }
+        @media screen and (max-width: 900px) {
+            .container { padding: 10px; }
+            .page { width: 100%; min-height: auto; margin-bottom: 10px; }
+            .page-inner { padding: 8mm 10mm; }
+            .cover-title { font-size: 32pt; }
+            .deliverables-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="passwordScreen">
+    <div class="password-box">
+        <div class="password-logo">Dynamic Code</div>
+        <h2>Client Portal</h2>
+        <p>Access your proposals, projects, and deliverables</p>
+        <div class="password-input-wrapper">
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <button class="password-toggle" id="passwordToggle" type="button" onclick="togglePasswordVisibility()" aria-label="Show password">
+                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+        </div>
+        <button onclick="checkPassword()" class="password-submit-btn">Sign in</button>
+        <div id="passwordError" class="password-error"></div>
+    </div>
+</div>
+
+<div class="container" id="proposalContent" style="display: none;">
+
+    <!-- PAGE 1: COVER -->
+    <div class="page" id="cover">
+        <div class="page-inner cover">
+            <div class="cover-header">
+                <div class="client-wordmark">Budget Booze</div>
+                <img src="dynamiccode-logo.svg" alt="Dynamic Code" class="logo-img">
+            </div>
+            <div class="cover-main">
+                <p class="cover-eyebrow">Marketing Proposal</p>
+                <h1 class="cover-title">Building Brand<br>Equity</h1>
+                <p class="cover-subtitle">Meta Ads Management & Social Media Management</p>
+                <p class="cover-description">A combined media buying and social media management service to drive brand awareness, grow Budget Booze's audience, and convert followers into customers across Facebook and Instagram.</p>
+            </div>
+            <div class="cover-footer">
+                <div class="cover-footer-item">
+                    <span class="cover-footer-label">Prepared For</span>
+                    <span class="cover-footer-value">Ben Brock<br>Value Liquor Group</span>
+                </div>
+                <div class="cover-footer-item">
+                    <span class="cover-footer-label">Prepared By</span>
+                    <span class="cover-footer-value">Dynamic Code</span>
+                </div>
+                <div class="cover-footer-item">
+                    <span class="cover-footer-label">Date</span>
+                    <span class="cover-footer-value" id="currentDate"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: WHAT'S INCLUDED -->
+    <div class="page">
+        <div class="accent-bar"></div>
+        <div class="page-inner">
+            <div class="page-header">
+                <img src="dynamiccode-logo.svg" alt="Dynamic Code" class="page-header-logo">
+                <span class="page-header-title">Budget Booze × Dynamic Code</span>
+            </div>
+            <h1>What's Included</h1>
+            <div class="section">
+                <p>Dynamic Code will manage both paid media and organic social for Budget Booze with two dedicated services running in tandem — designed to build awareness, grow the audience, and drive sales.</p>
+            </div>
+
+            <div class="section">
+                <h2>Service 1: Meta Ads Management</h2>
+                <div class="deliverables-grid">
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">🎯</div>
+                        <div class="deliverable-title">Campaign Strategy</div>
+                        <div class="deliverable-desc">Audience research, campaign structure, and budget allocation across Facebook and Instagram to maximise reach and return on ad spend.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">🎨</div>
+                        <div class="deliverable-title">Ad Creative</div>
+                        <div class="deliverable-desc">Graphics, copy, and video assets created and optimised for Meta platforms — built to stop the scroll and drive action.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">📊</div>
+                        <div class="deliverable-title">Conversion Tracking</div>
+                        <div class="deliverable-desc">Pixel setup, event tracking, and attribution to measure campaign performance and optimise for results.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">🔁</div>
+                        <div class="deliverable-title">Ongoing Optimisation</div>
+                        <div class="deliverable-desc">Continuous A/B testing of creative, copy, and audiences. Budget shifted to highest-performing campaigns monthly.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Service 2: Social Media Management</h2>
+                <div class="deliverables-grid">
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">📅</div>
+                        <div class="deliverable-title">Content Calendar</div>
+                        <div class="deliverable-desc">Monthly content plan aligned with promotions, specials, and events. Scheduled for optimal reach across Facebook and Instagram.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">✍️</div>
+                        <div class="deliverable-title">Copywriting & Design</div>
+                        <div class="deliverable-desc">On-brand posts, stories, and reels — professionally written and designed to engage Budget Booze's audience and reflect the brand's voice.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">💬</div>
+                        <div class="deliverable-title">Community Management</div>
+                        <div class="deliverable-desc">Monitoring and responding to comments, DMs, and reviews to keep the audience engaged and the brand reputation strong.</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">📈</div>
+                        <div class="deliverable-title">Monthly Reporting</div>
+                        <div class="deliverable-desc">Clear performance reports covering reach, engagement, follower growth, and paid media results each month.</div>
+                    </div>
+                </div>
+            </div>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: STRATEGY & TERMS -->
+    <div class="page">
+        <div class="accent-bar"></div>
+        <div class="page-inner">
+            <div class="page-header">
+                <img src="dynamiccode-logo.svg" alt="Dynamic Code" class="page-header-logo">
+                <span class="page-header-title">Budget Booze × Dynamic Code</span>
+            </div>
+            <h1>Campaign Strategy</h1>
+            <div class="section">
+                <div class="info-card">
+                    <ul>
+                        <li><strong>Audience Research:</strong> Identify and target Budget Booze's ideal customers across Facebook and Instagram</li>
+                        <li><strong>Paid + Organic Alignment:</strong> Ads and organic content work together to reinforce messaging and maximise impact</li>
+                        <li><strong>A/B Testing:</strong> Continuously test creative, copy, and audiences to improve performance over time</li>
+                        <li><strong>Retargeting:</strong> Re-engage website visitors, past customers, and warm audiences with targeted ads</li>
+                        <li><strong>Monthly Reporting:</strong> Transparent metrics across both services with insights and next steps</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Service Terms</h2>
+                <div class="info-card">
+                    <ul>
+                        <li><strong>Billing:</strong> Monthly recurring, invoiced at the start of each month</li>
+                        <li><strong>Contract:</strong> Month-to-month with 30 days notice to cancel</li>
+                        <li><strong>Ad Spend:</strong> Client provides ad spend budget (paid directly to Meta)</li>
+                        <li><strong>Platforms:</strong> Facebook & Instagram (Meta Business Suite)</li>
+                        <li><strong>Reporting:</strong> Monthly performance report covering both services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>What We Need From You</h2>
+                <div class="info-card">
+                    <ul>
+                        <li>Meta Business Manager access (or we'll help you set it up)</li>
+                        <li>Social media account access for Instagram and Facebook</li>
+                        <li>Brand assets, product photos, and any existing guidelines</li>
+                        <li>Ad spend budget confirmation</li>
+                        <li>Key promotions, specials, and campaign priorities each month</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Expected Outcomes</h2>
+                <div class="info-card">
+                    <ul>
+                        <li>Increased brand awareness and reach across Facebook and Instagram</li>
+                        <li>Growth in followers, engagement, and organic community</li>
+                        <li>Measurable ROAS (Return on Ad Spend) from paid campaigns</li>
+                        <li>Higher website traffic and in-store foot traffic</li>
+                        <li>A consistent, professional brand presence across all social channels</li>
+                    </ul>
+                </div>
+            </div>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: INVESTMENT -->
+    <div class="page">
+        <div class="accent-bar"></div>
+        <div class="page-inner">
+            <div class="page-header">
+                <img src="dynamiccode-logo.svg" alt="Dynamic Code" class="page-header-logo">
+                <span class="page-header-title">Budget Booze × Dynamic Code</span>
+            </div>
+            <h1>Investment</h1>
+
+            <div class="pricing-card">
+                <div class="pricing-row">
+                    <span class="pricing-label">Meta Ads Management</span>
+                    <span class="pricing-value">$2,000 AUD/month</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="pricing-label">Social Media Management</span>
+                    <span class="pricing-value">$2,000 AUD/month</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="pricing-label">VLG Member Discount (Month 1)</span>
+                    <span class="pricing-value">-$2,000 AUD</span>
+                </div>
+                <div class="pricing-total">
+                    <div class="pricing-row">
+                        <span class="pricing-total-label">Month 1 Investment</span>
+                        <span class="pricing-total-value">$2,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="info-card">
+                    <p style="margin: 0;"><strong>Note:</strong> After the first month, the ongoing monthly investment is <strong>$4,000 AUD/month</strong> ($2,000 Meta Ads + $2,000 Social Media Management). The $2,000 first-month discount is an exclusive benefit for Value Liquor Group members. Ad spend budget is separate and paid directly to Meta.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ongoing Monthly Rate</h2>
+                <div class="pricing-card" style="margin-bottom: 0;">
+                    <div class="pricing-row">
+                        <span class="pricing-label">Meta Ads Management</span>
+                        <span class="pricing-value">$2,000 AUD</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span class="pricing-label">Social Media Management</span>
+                        <span class="pricing-value">$2,000 AUD</span>
+                    </div>
+                    <div class="pricing-total">
+                        <div class="pricing-row">
+                            <span class="pricing-total-label">Monthly Investment (from Month 2)</span>
+                            <span class="pricing-total-value">$4,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: AGREEMENT -->
+    <div class="page">
+        <div class="accent-bar"></div>
+        <div class="page-inner">
+            <div class="page-header">
+                <img src="dynamiccode-logo.svg" alt="Dynamic Code" class="page-header-logo">
+                <span class="page-header-title">Budget Booze × Dynamic Code</span>
+            </div>
+            <h1>Agreement</h1>
+            <div class="section">
+                <p>By signing below, you agree to the Meta Ads Management and Social Media Management services outlined in this proposal at <strong>$2,000 AUD for Month 1</strong> (VLG Member Discount applied), followed by <strong>$4,000 AUD per month</strong> ongoing.</p>
+            </div>
+            <div class="signature-section">
+                <h3>Client Signature</h3>
+                <div class="signature-canvas-wrapper">
+                    <div id="signaturePlaceholder" class="signature-placeholder">Click "Start Signing" below to sign this proposal</div>
+                    <canvas id="signatureCanvas" style="display: none;"></canvas>
+                </div>
+                <div class="signature-buttons">
+                    <button class="btn btn-primary" onclick="startSigning()">Start Signing</button>
+                    <button class="btn btn-secondary" onclick="clearSignature()" style="display: none;" id="clearBtn">Clear</button>
+                    <button class="btn btn-primary" onclick="saveSignature()" style="display: none;" id="saveBtn">Save Signature</button>
+                </div>
+                <div class="signature-info">
+                    <p><strong>Name:</strong> <span id="sigName">Ben Brock</span></p>
+                    <p><strong>Company:</strong> <span id="sigCompany">Value Liquor Group</span></p>
+                    <p><strong>Date:</strong> <span id="sigDate"></span></p>
+                </div>
+            </div>
+            <div class="section" style="margin-top: 8mm;">
+                <h3>Terms & Conditions</h3>
+                <div class="info-card">
+                    <ul style="font-size: 9pt;">
+                        <li>Service begins upon first payment receipt</li>
+                        <li>Month 1 invoiced at $2,000 AUD (VLG Member Discount applied)</li>
+                        <li>Ongoing monthly rate is $4,000 AUD from Month 2 onwards</li>
+                        <li>Management fees are separate from Meta ad spend budget</li>
+                        <li>All ad creative and content created remains property of Budget Booze</li>
+                        <li>Either party may terminate with 30 days written notice</li>
+                        <li>Rates subject to review annually</li>
+                    </ul>
+                </div>
+            </div>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        const input = document.getElementById('passwordInput');
+        const toggle = document.getElementById('passwordToggle');
+        input.type = input.type === 'password' ? 'text' : 'password';
+        toggle.setAttribute('aria-label', input.type === 'password' ? 'Show password' : 'Hide password');
+    }
+
+    const CORRECT_PASSWORD = 'ValueLiquor';
+    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1468307018715496469/gIi4eszVYBz5lbHPwKU-BILNtUtvCFDE1eqtBNz8NpfP4SsH54R0cbiMEEyZoA4QXYu-';
+
+    function checkPassword() {
+        const input = document.getElementById('passwordInput').value;
+        const error = document.getElementById('passwordError');
+        if (input === CORRECT_PASSWORD) {
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('proposalContent').style.display = 'block';
+            if (!localStorage.getItem('proposalViewed_budgetbooze')) {
+                localStorage.setItem('proposalViewed_budgetbooze', new Date().toISOString());
+                sendWebhook('Proposal Viewed', 'Someone accessed the Budget Booze proposal');
+            }
+        } else {
+            error.textContent = 'Incorrect password. Please try again.';
+        }
+    }
+
+    document.getElementById('passwordInput').addEventListener('keypress', e => { if (e.key === 'Enter') checkPassword(); });
+
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('currentDate').textContent = dateStr;
+    document.getElementById('sigDate').textContent = dateStr;
+
+    let canvas, ctx, drawing = false;
+    function startSigning() {
+        document.getElementById('signaturePlaceholder').style.display = 'none';
+        document.getElementById('signatureCanvas').style.display = 'block';
+        document.getElementById('clearBtn').style.display = 'inline-block';
+        document.getElementById('saveBtn').style.display = 'inline-block';
+        canvas = document.getElementById('signatureCanvas');
+        ctx = canvas.getContext('2d');
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = 100;
+        ctx.strokeStyle = '#000'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+    }
+    function startDrawing(e) { drawing = true; draw(e); }
+    function draw(e) {
+        if (!drawing) return; e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = e.touches ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
+        const y = e.touches ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
+        ctx.lineTo(x, y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x, y);
+    }
+    function stopDrawing() { drawing = false; ctx.beginPath(); }
+    function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.beginPath(); }
+    function saveSignature() {
+        localStorage.setItem('proposalSignature_budgetbooze', canvas.toDataURL());
+        alert('Signature saved! Thank you for your agreement.');
+        sendWebhook('Proposal Signed', 'Budget Booze proposal has been signed by Ben Brock');
+    }
+    function sendWebhook(action, description) {
+        fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ embeds: [{ title: `Budget Booze - ${action}`, description, color: 0xf05522, fields: [{ name: 'Client', value: 'Ben Brock @ Value Liquor Group', inline: true }, { name: 'Service', value: 'Meta Ads + Social Media Management', inline: true }, { name: 'Investment', value: '$2,000 Month 1 / $4,000/month ongoing', inline: false }], timestamp: new Date().toISOString() }] }) }).catch(() => {});
+    }
+    window.addEventListener('load', function() {
+        const savedSig = localStorage.getItem('proposalSignature_budgetbooze');
+        if (savedSig && canvas) { const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0); img.src = savedSig; }
+    });
+</script>
+</body>
+</html>
