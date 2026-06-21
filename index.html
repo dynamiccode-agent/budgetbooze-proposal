@@ -498,6 +498,7 @@
     }
     function sendWebhook(action, description) {
         fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ embeds: [{ title: `Budget Booze - ${action}`, description, color: 0xf05522, fields: [{ name: 'Client', value: 'Ben Brock @ Value Liquor Group', inline: true }, { name: 'Service', value: 'Meta Ads + Social Media Management', inline: true }, { name: 'Investment', value: '$2,000 Month 1 / $4,000/month ongoing', inline: false }], timestamp: new Date().toISOString() }] }) }).catch(() => {});
+        fetch('/api/notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action, proposalName: 'Budget Booze', client: 'Budget Booze — Value Liquor Group', service: 'Meta Ads Management + Social Media Management', investment: '$2,000 Month 1 / $4,000/month ongoing' }) }).catch(() => {});
     }
     window.addEventListener('load', function() {
         const savedSig = localStorage.getItem('proposalSignature_budgetbooze');
